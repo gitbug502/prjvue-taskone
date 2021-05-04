@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-<!--  todo test push github1  -->
+<!--  todo test push github2  -->
   </div>
 </template>
 
