@@ -1,5 +1,6 @@
 package com.lyd.boot;
 
+import ch.qos.logback.core.db.DBHelper;
 import com.lyd.boot.bean.Pet;
 import com.lyd.boot.bean.User;
 import com.lyd.boot.config.MyConfig;
@@ -10,7 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * 主程序类
+ * 主程序类:主配置类
  *
  * @SpringBootApplication: 这是一个spring boot应用
  * 这是一个合成注解，下面三个注解等同于@SpringBootApplication,需要指定包扫面路径时需要分开写注解或者写成
@@ -42,13 +43,32 @@ public class MainApplication {
 
         //如果@Configuration(proxyBeanMethods = true)代理对象调用方法，springboot总会检查这个组件是否在容器中有
         //保持组件单实例
-        User user1 = bean.user01();
+        /*User user1 = bean.user01();
         User user2 = bean.user01();
         System.out.println(user1 == user2);
 
         User user01 = run.getBean("user01", User.class);
         Pet tom = run.getBean("tom", Pet.class);
-        System.out.println("用户的宠物：" + (user01.getPet() == tom));
+        System.out.println("用户的宠物：" + (user01.getPet() == tom));*/
 
+        //5、获取组件
+        String[] beanNamesForType = run.getBeanNamesForType(User.class);
+        System.out.println("==========");
+        for (String s : beanNamesForType) {
+            System.out.println(s);
+        }
+
+        DBHelper bean1=run.getBean(DBHelper.class);
+        System.out.println(bean1);
+
+        boolean test=run.containsBean("test");
+        System.out.println("容器中test组件有没有："+test);
+        boolean tser01= run.containsBean("user01");
+        System.out.println("容器中user01组件有没有："+tser01);
+
+        boolean haha= run.containsBean("haha");
+        System.out.println("容器中haha组件有没有："+haha);
+        boolean hehe= run.containsBean("hehe");
+        System.out.println("容器中hehe组件有没有："+hehe);
     }
 }
